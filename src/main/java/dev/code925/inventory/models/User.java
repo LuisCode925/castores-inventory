@@ -1,14 +1,10 @@
 package dev.code925.inventory.models;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,28 +12,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@Entity(name = "products")
+@Entity(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 40)
-    private String name;
+    @Column(unique = true, length = 32) // Minimo 4 y 32 como maximo
+    private String username;
 
-    private Integer stock;
+    @Column(unique = true)
+    private String email;
 
-    @Column(precision = 16, scale = 2)
-    private BigDecimal price;
-
-    private Boolean isAvailable;
-
-    // Relaciones
-
-    @OneToMany(mappedBy = "product")
-    private List<Sale> sales;
+    private String password;
 
 }
