@@ -9,10 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateProductStock {
+public class DecreaseProductStock {
 
     @NotBlank
-    @Positive(message = "Solo se puede aumentar el stock del producto.")
-    private Integer stock;
+    @Positive
+    private Long productId;
+
+    @NotBlank
+    @Positive(message = "El nuemero de productos que desea debe ser positivo.")
+    private Integer quantity;
 
 }

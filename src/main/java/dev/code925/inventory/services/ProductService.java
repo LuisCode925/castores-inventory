@@ -1,15 +1,15 @@
 package dev.code925.inventory.services;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.dto.CreateProduct;
-import dev.code925.inventory.models.dto.UpdateProductStock;
+import dev.code925.inventory.models.dto.DecreaseProductStock;
+import dev.code925.inventory.models.dto.IncreaseProductStock;
 import dev.code925.inventory.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -29,9 +29,9 @@ public class ProductService {
         return String.format("El producto %s con id %d se hacreado.", saved.getName(), saved.getId());
     }
 
-    public Product increaseStock(final String productId, final UpdateProductStock request) {
+    public Product increaseStock(final String productId, final IncreaseProductStock request) {
         Product searchProduct = productRepository.findById(Long.parseLong(productId)).orElseThrow();
-        Integer accumulatedStock = searchProduct.getStock() + request.getStock();
+        Integer accumulatedStock = searchProduct.getStock() + request.getQuantity();
         searchProduct.setStock(accumulatedStock);
         return productRepository.save(searchProduct);
     }
@@ -44,6 +44,26 @@ public class ProductService {
 
     public List<Product> allProducts() {
         return productRepository.findAll();
+    }
+
+    // Salida de productos
+
+    public List<Product> showOnlyAvailableOnes() {
+        return productRepository.findByIsAvailableTrue();
+    }
+
+    @Transactional
+    public Product subtractStock(final DecreaseProductStock request) throws Exception {
+        Product searchProduct = productRepository.findById(request.getProductId()).orElseThrow();
+
+        if (request.getQuantity() > searchProduct.getStock()) {
+            throw new Exception(String.format("No existen suficientes existencias del producto %s con id %d",
+                    searchProduct.getName(), searchProduct.getId()));
+        }
+        Integer currentStock = searchProduct.getStock() - request.getQuantity();
+        searchProduct.setStock(currentStock);
+
+        return productRepository.save(searchProduct);
     }
 
 }

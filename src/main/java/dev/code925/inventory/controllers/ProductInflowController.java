@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.dto.CreateProduct;
-import dev.code925.inventory.models.dto.UpdateProductStock;
+import dev.code925.inventory.models.dto.IncreaseProductStock;
 import dev.code925.inventory.services.ProductService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
-public class ProductController {
+public class ProductInflowController {
 
     private final ProductService service;
 
@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{productId}")
-    public ResponseEntity<Product> increaseStock(@RequestBody UpdateProductStock request,
+    public ResponseEntity<Product> increaseStock(@RequestBody IncreaseProductStock request,
             @PathVariable String productId) {
         Product updated = service.increaseStock(productId, request);
         return ResponseEntity.status(HttpStatus.OK).body(updated);
@@ -44,32 +44,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<?>> getAllProducts() {
+    public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok(service.allProducts());
     }
-
-    /*
-     * 
-     * @GetMapping("/{id}")
-     * public ResponseEntity<?> getCustomer(@PathVariable String customerId) {
-     * return ResponseEntity.ok(customerService.getCustomerById(customerId));
-     * }
-     * 
-     * @PutMapping("/{id}")
-     * public ResponseEntity<Customer> fullUpdate(@Valid @RequestBody UpdateCustomer
-     * request,
-     * 
-     * @PathVariable String customerId) {
-     * Customer updated = customerService.update(customerId, request);
-     * return ResponseEntity.status(HttpStatus.OK).body(updated);
-     * }
-     * 
-     * @DeleteMapping("/{customerId}")
-     * public ResponseEntity<Void> delete(@PathVariable("customerId") String
-     * customerId) {
-     * customerService.delete(customerId);
-     * return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-     * }
-     */
 
 }
