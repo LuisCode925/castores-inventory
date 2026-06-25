@@ -1,13 +1,13 @@
 package dev.code925.inventory.models;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,22 +15,27 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@Entity(name = "roles")
+@Entity(name = "inventory_transactions")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    private OffsetDateTime createdAt;
+    private Integer quantity;
 
-    // Relaciones
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User responsible;
 
-    @OneToMany(mappedBy = "role") // Campo User.role
-    private List<User> users;
+    private TransactionMovement movement;
+
+    private OffsetDateTime registeredAt;
 
 }

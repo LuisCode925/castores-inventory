@@ -40,4 +40,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Sale> sales;
 
+    @OneToMany(mappedBy = "product")
+    private List<Transaction> transactions;
+
 }

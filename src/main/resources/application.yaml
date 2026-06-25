@@ -14,7 +14,7 @@ spring:
   jpa:
     defer-datasource-initialization: true # Permite que se actualize la tabla y luego se llenen con la data de prueba
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update # create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
