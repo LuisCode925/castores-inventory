@@ -1,0 +1,50 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: inventory
+      MYSQL_USER: inventory_manager
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password1234
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword1234"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    ports:
+      - "127.0.0.1:3306:3306"
+    security_opt:
+      - no-new-privileges:true # Evita la elevación de privilegios dentro del contenedor
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.2-apache
+    depends_on:
+      mysql:
+        condition: service_healthy  
+    environment:
+      PMA_PORT: 3306
+      PMA_HOST: mysql
+      PMA_ARBITRARY: 1 # Permite cambiar de usuario en la pantalla de login si lo necesitas
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    ports:
+      - '8080:80'
+    volumes:
+      - pma_sessions:/sessions   
+
+volumes:
+  mysql_data:
+  mysql_config:
+  pma_sessions:

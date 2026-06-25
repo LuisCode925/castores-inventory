@@ -1,0 +1,20 @@
+server:
+  port: 8090
+  
+spring:
+  application:
+    name: inventory
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/reports
+    username: inventory_manager
+    password: password
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true # Permite que se actualize la tabla y luego se llenen con la data de prueba
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
