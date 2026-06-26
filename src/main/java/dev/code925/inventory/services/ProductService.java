@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.TransactionMovement;
-import dev.code925.inventory.models.dto.CreateProduct;
-import dev.code925.inventory.models.dto.CreateTransaction;
-import dev.code925.inventory.models.dto.DecreaseProductStock;
-import dev.code925.inventory.models.dto.IncreaseProductStock;
+import dev.code925.inventory.models.dto.input.CreateProduct;
+import dev.code925.inventory.models.dto.input.CreateTransaction;
+import dev.code925.inventory.models.dto.input.DecreaseProductStock;
+import dev.code925.inventory.models.dto.input.IncreaseProductStock;
 import dev.code925.inventory.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 

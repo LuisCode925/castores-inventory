@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.code925.inventory.models.Product;
-import dev.code925.inventory.models.dto.DecreaseProductStock;
+import dev.code925.inventory.models.dto.input.DecreaseProductStock;
 import dev.code925.inventory.services.ProductService;
 import lombok.RequiredArgsConstructor;
 

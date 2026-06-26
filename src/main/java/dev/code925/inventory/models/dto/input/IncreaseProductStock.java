@@ -1,4 +1,4 @@
-package dev.code925.inventory.models.dto;
+package dev.code925.inventory.models.dto.input;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DecreaseProductStock {
+public class IncreaseProductStock {
 
     @NotBlank
-    @Positive
-    private Long productId;
-
-    @NotBlank
-    @Positive(message = "El nuemero de productos que desea debe ser positivo.")
+    @Positive(message = "La cantidad que solo puede ser un valor positivo.")
     private Integer quantity;
 
 }

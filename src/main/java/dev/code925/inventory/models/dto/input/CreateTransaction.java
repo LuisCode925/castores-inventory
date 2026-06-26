@@ -1,4 +1,4 @@
-package dev.code925.inventory.models.dto;
+package dev.code925.inventory.models.dto.input;
 
 import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.TransactionMovement;

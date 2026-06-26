@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import dev.code925.inventory.models.Transaction;
-import dev.code925.inventory.models.dto.CreateTransaction;
+import dev.code925.inventory.models.dto.input.CreateTransaction;
 import dev.code925.inventory.repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 
