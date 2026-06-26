@@ -1,14 +1,12 @@
 package dev.code925.inventory.models;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,10 +35,10 @@ public class Product {
 
     // Relaciones
 
-    @OneToMany(mappedBy = "product")
-    private List<Sale> sales;
+    // @OneToMany(mappedBy = "product")
+    // private List<Sale> sales;
 
-    @OneToMany(mappedBy = "product")
-    private List<Transaction> transactions;
+    // @OneToMany(mappedBy = "product")
+    // private List<Transaction> transactions;
 
 }

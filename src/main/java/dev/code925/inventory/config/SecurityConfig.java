@@ -3,6 +3,7 @@ package dev.code925.inventory.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import dev.code925.inventory.models.Token;
-import dev.code925.inventory.models.enums.Roles;
 import dev.code925.inventory.repositories.TokenRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -32,10 +32,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/v1/users").hasRole(Roles.ADMINISTRATOR.name())
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .anyRequest()
-                        .authenticated())
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

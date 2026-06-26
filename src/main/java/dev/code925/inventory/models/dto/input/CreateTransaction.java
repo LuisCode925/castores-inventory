@@ -1,7 +1,7 @@
 package dev.code925.inventory.models.dto.input;
 
 import dev.code925.inventory.models.Product;
-import dev.code925.inventory.models.TransactionMovement;
+import dev.code925.inventory.models.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateTransaction {
 
-    private TransactionMovement type;
+    private TransactionType type;
 
     private Product product;
 

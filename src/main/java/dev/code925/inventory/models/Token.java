@@ -39,7 +39,7 @@ public class Token {
     @Column(nullable = false)
     private Boolean expired;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User owner;
 }

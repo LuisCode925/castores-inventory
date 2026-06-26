@@ -2,6 +2,7 @@ package dev.code925.inventory.models;
 
 import java.time.OffsetDateTime;
 
+import dev.code925.inventory.models.enums.TransactionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class Transaction {
     @JoinColumn(name = "user_id")
     private User responsible;
 
-    private TransactionMovement movement;
+    private TransactionType movement;
 
     private OffsetDateTime registeredAt;
 

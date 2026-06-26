@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.code925.inventory.exceptions.ProductWithoutEnoughtStockException;
+import dev.code925.inventory.exceptions.ProductNotFoundException;
 import dev.code925.inventory.models.Product;
-import dev.code925.inventory.models.TransactionMovement;
 import dev.code925.inventory.models.dto.input.CreateProduct;
 import dev.code925.inventory.models.dto.input.CreateTransaction;
 import dev.code925.inventory.models.dto.input.DecreaseProductStock;
 import dev.code925.inventory.models.dto.input.IncreaseProductStock;
+import dev.code925.inventory.models.enums.TransactionType;
 import dev.code925.inventory.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -30,22 +32,23 @@ public class ProductService {
                 .isAvailable(false)
                 .build();
         Product saved = productRepository.save(product);
-        return String.format("El producto %s con id %d se hacreado.", saved.getName(), saved.getId());
+        return String.format("El producto %s con id %d se ha creado.", saved.getName(), saved.getId());
     }
 
     @Transactional
-    public Product increaseStock(final String productId, final IncreaseProductStock request) {
-        Product searchProduct = productRepository.findById(Long.parseLong(productId)).orElseThrow();
+    public Product increaseStock(final String productId, final IncreaseProductStock request, final String token) {
+        Product searchProduct = productRepository.findById(Long.parseLong(productId))
+                .orElseThrow(() -> new ProductNotFoundException("No existe el producto buscado."));
         Integer accumulatedStock = searchProduct.getStock() + request.getQuantity();
         searchProduct.setStock(accumulatedStock);
 
         // Registro del movimiento
         CreateTransaction inflowTransaction = CreateTransaction.builder()
-                .type(TransactionMovement.INFLOW)
+                .type(TransactionType.INFLOW)
                 .product(searchProduct)
                 .quantity(request.getQuantity())
                 .build();
-        transactionService.recordMovement(inflowTransaction);
+        transactionService.recordMovement(inflowTransaction, token);
 
         return productRepository.save(searchProduct);
     }
@@ -79,12 +82,14 @@ public class ProductService {
     }
 
     @Transactional
-    public Product subtractStock(final DecreaseProductStock request) throws Exception {
-        Product searchProduct = productRepository.findById(request.getProductId()).orElseThrow();
+    public Product subtractStock(final DecreaseProductStock request, final String token) throws Exception {
+        Product searchProduct = productRepository.findById(request.getProductId())
+                .orElseThrow(() -> new ProductNotFoundException("No existe el producto buscado."));
 
         if (request.getQuantity() > searchProduct.getStock()) {
-            throw new Exception(String.format("No existen suficientes existencias del producto %s con id %d",
-                    searchProduct.getName(), searchProduct.getId()));
+            throw new ProductWithoutEnoughtStockException(
+                    String.format("No existen suficientes existencias del producto %s con id %d",
+                            searchProduct.getName(), searchProduct.getId()));
         }
 
         Integer currentStock = searchProduct.getStock() - request.getQuantity();
@@ -92,11 +97,11 @@ public class ProductService {
 
         // Registro del movimiento
         CreateTransaction outflowTransaction = CreateTransaction.builder()
-                .type(TransactionMovement.OUTFLOW)
+                .type(TransactionType.OUTFLOW)
                 .product(searchProduct)
                 .quantity(request.getQuantity())
                 .build();
-        transactionService.recordMovement(outflowTransaction);
+        transactionService.recordMovement(outflowTransaction, token);
 
         return productRepository.save(searchProduct);
     }
