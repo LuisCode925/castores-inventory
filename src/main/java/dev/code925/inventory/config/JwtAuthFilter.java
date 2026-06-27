@@ -41,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // Bypass para CORS - Preflight request
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
+            filterChain.doFilter(request, response);
             return;
         }
 
