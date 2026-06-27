@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.dto.input.DecreaseProductStock;
 import dev.code925.inventory.services.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -32,7 +33,7 @@ public class ProductOutflowController {
 
     @PatchMapping("/outflow")
     @PreAuthorize("hasRole('WAREHOUSEMAN')")
-    public ResponseEntity<Product> decreaseStock(@RequestBody DecreaseProductStock request,
+    public ResponseEntity<Product> decreaseStock(@Valid @RequestBody DecreaseProductStock request,
             @RequestHeader("Authorization") String token) throws Exception {
         Product updated = service.subtractStock(request, token);
         return ResponseEntity.status(HttpStatus.OK).body(updated);

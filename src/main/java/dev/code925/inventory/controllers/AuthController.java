@@ -12,6 +12,7 @@ import dev.code925.inventory.models.dto.input.LoginUser;
 import dev.code925.inventory.models.dto.input.RegisterUser;
 import dev.code925.inventory.models.dto.output.TokenResponse;
 import dev.code925.inventory.services.authentication.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,13 +23,13 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/register")
-    public ResponseEntity<TokenResponse> register(@RequestBody final RegisterUser request) {
+    public ResponseEntity<TokenResponse> register(@Valid @RequestBody final RegisterUser request) {
         final TokenResponse token = service.register(request);
         return ResponseEntity.ok(token);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> authenticate(@RequestBody final LoginUser request) {
+    public ResponseEntity<TokenResponse> authenticate(@Valid @RequestBody final LoginUser request) {
         final TokenResponse token = service.login(request);
         return ResponseEntity.ok(token);
     }

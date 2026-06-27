@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
         var errors = new HashMap<String, String>();
         errors.put("message", "Se ha producido un error desconocido. Contacte al administrador.");
         errors.put("datetime", OffsetDateTime.now().toString());
+        errors.put("trace", exception.getStackTrace().toString());
 
         log.error("Error: {}", exception.toString());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(errors));

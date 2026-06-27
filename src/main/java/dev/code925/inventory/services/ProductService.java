@@ -54,21 +54,17 @@ public class ProductService {
     }
 
     @Transactional
-    public String banned(final String productId) {
+    public Product banned(final String productId) {
         Product searchProduct = productRepository.findById(Long.parseLong(productId)).orElseThrow();
         searchProduct.setIsAvailable(false);
-        Product saved = productRepository.save(searchProduct);
-
-        return String.format("El producto %s con id %d: ha sido desactivado.", saved.getName(), saved.getId());
+        return productRepository.save(searchProduct);
     }
 
     @Transactional
-    public String reactivateProduct(final String productId) {
+    public Product reactivateProduct(final String productId) {
         Product searchProduct = productRepository.findById(Long.parseLong(productId)).orElseThrow();
         searchProduct.setIsAvailable(true);
-        Product saved = productRepository.save(searchProduct);
-
-        return String.format("El producto %s con id %d: ha sido activado.", saved.getName(), saved.getId());
+        return productRepository.save(searchProduct);
     }
 
     @Transactional(readOnly = true)

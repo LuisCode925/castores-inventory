@@ -1,0 +1,675 @@
+{
+  "info": {
+    "_postman_id": "cde2800c-b632-4279-a374-3eb321536638",
+    "name": "Prueba Tecnica Castores",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17970310"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Luis Mario\",\n    \"email\": \"195925luis@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Luis Mario\",\n    \"email\": \"195925luis@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Create Normal User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzIiwibmFtZSI6IlVTRVIiLCJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTc4MjUwOTI2MSwiZXhwIjoxNzgyNTk1NjYxfQ.Wc35gQByAbuZc3u3ISxatJdY7Q9MMzBlNPbjpllo1wo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Usuario Normal\",\n    \"email\": \"almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "History",
+      "item": [
+        {
+          "name": "All Transactions",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1NTM0OTgsImV4cCI6MTc4MjYzOTg5OH0.FGUSQRYmmTevwuuRYsNQ_rS-6G_5uA53o5A6TKvARHk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Hatsune Miku\",\n    \"email\": \"Almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inflow Transactions",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI0OTk2MDQsImV4cCI6MTc4MjU4NjAwNH0.N84CpMG1FpjZglPiz3_F87PtQ1rlkpIKLJmYCnHywCU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Hatsune Miku\",\n    \"email\": \"Almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/transactions/inflow",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "transactions",
+                "inflow"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Outflow Transactions",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI0OTk2MDQsImV4cCI6MTc4MjU4NjAwNH0.N84CpMG1FpjZglPiz3_F87PtQ1rlkpIKLJmYCnHywCU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Hatsune Miku\",\n    \"email\": \"Almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/transactions/outflow",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "transactions",
+                "outflow"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inflow",
+      "item": [
+        {
+          "name": "All Products",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1NjU0NDcsImV4cCI6MTc4MjY1MTg0N30.JLe9gUBrR4-3b8zFSafFU0_iBrveh_3Hsgf_hl12oJM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Hatsune Miku\",\n    \"email\": \"Almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Products",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1MDE1ODgsImV4cCI6MTc4MjU4Nzk4OH0.sOZ6AG4UafPfIp8891R8mF5Rpq5ocVHEdXOZ7mY0LOo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Monitor 4K\",\n    \"price\": 2333.99\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Products Inflow",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1NTM0OTgsImV4cCI6MTc4MjYzOTg5OH0.FGUSQRYmmTevwuuRYsNQ_rS-6G_5uA53o5A6TKvARHk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"quantity\": 13\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products/7",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Products Deactivate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1NzUzNTYsImV4cCI6MTc4MjY2MTc1Nn0.168K-ahX64y2wloPj14XzY2T4BfNFrSVjC1i5-P23Hs",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"quantity\": 13\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products/7",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Products Activate",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwibmFtZSI6IkFETUlOSVNUUkFUT1IiLCJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3ODI1NzUzNTYsImV4cCI6MTc4MjY2MTc1Nn0.168K-ahX64y2wloPj14XzY2T4BfNFrSVjC1i5-P23Hs",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products/4/activate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "4",
+                "activate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Outflow",
+      "item": [
+        {
+          "name": "Products Actives",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyIiwibmFtZSI6IldBUkVIT1VTRU1BTiIsInN1YiI6IndvcmtlckBnbWFpbC5jb20iLCJpYXQiOjE3ODI1MTEyNDcsImV4cCI6MTc4MjU5NzY0N30.DSbn2o04t8QgpKDqAxp4XJtx1laP_evFDn8vM6RNPZc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Hatsune Miku\",\n    \"email\": \"Almacenista@gmail.com\",\n    \"password\": \"925lolXD$\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products/actives",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "actives"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Products Outflow",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyIiwibmFtZSI6IldBUkVIT1VTRU1BTiIsInN1YiI6IndvcmtlckBnbWFpbC5jb20iLCJpYXQiOjE3ODI1MTEyNDcsImV4cCI6MTc4MjU5NzY0N30.DSbn2o04t8QgpKDqAxp4XJtx1laP_evFDn8vM6RNPZc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"productId\": 7,\n    \"quantity\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8090/api/v1/products/outflow",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "outflow"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

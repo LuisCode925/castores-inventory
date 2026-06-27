@@ -19,6 +19,7 @@ import dev.code925.inventory.models.Product;
 import dev.code925.inventory.models.dto.input.CreateProduct;
 import dev.code925.inventory.models.dto.input.IncreaseProductStock;
 import dev.code925.inventory.services.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -36,13 +37,13 @@ public class ProductInflowController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public ResponseEntity<String> create(@RequestBody CreateProduct request) {
+    public ResponseEntity<String> create(@Valid @RequestBody CreateProduct request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.addToInventory(request));
     }
 
     @PatchMapping("/{productId}")
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public ResponseEntity<Product> increaseStock(@RequestBody IncreaseProductStock request,
+    public ResponseEntity<Product> increaseStock(@Valid @RequestBody IncreaseProductStock request,
             @PathVariable String productId, @RequestHeader("Authorization") String token) {
         Product updated = service.increaseStock(productId, request, token);
         return ResponseEntity.status(HttpStatus.OK).body(updated);
@@ -50,13 +51,13 @@ public class ProductInflowController {
 
     @PatchMapping("/{productId}/activate")
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public ResponseEntity<String> activateProduct(@PathVariable String productId) {
+    public ResponseEntity<Product> activateProduct(@PathVariable String productId) {
         return ResponseEntity.status(HttpStatus.OK).body(service.reactivateProduct(productId));
     }
 
     @DeleteMapping("/{productId}")
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public ResponseEntity<String> deactivateProduct(@PathVariable String productId) {
+    public ResponseEntity<Product> deactivateProduct(@PathVariable String productId) {
         return ResponseEntity.status(HttpStatus.OK).body(service.banned(productId));
     }
 

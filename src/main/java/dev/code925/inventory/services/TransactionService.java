@@ -9,6 +9,7 @@ import dev.code925.inventory.exceptions.TokenNotFoundException;
 import dev.code925.inventory.models.Token;
 import dev.code925.inventory.models.Transaction;
 import dev.code925.inventory.models.dto.input.CreateTransaction;
+import dev.code925.inventory.models.dto.output.TransactionResponse;
 import dev.code925.inventory.models.enums.TransactionType;
 import dev.code925.inventory.repositories.TokenRepository;
 import dev.code925.inventory.repositories.TransactionRepository;
@@ -38,16 +39,35 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    public List<Transaction> allTransactions() {
-        return transactionRepository.findAll();
+    public List<TransactionResponse> allTransactions() {
+        return transactionRepository.findAll()
+                .stream()
+                .map(transaction -> TransactionResponse.builder()
+                        .id(transaction.getId())
+                        .product(transaction.getProduct().getName())
+                        .quantity(transaction.getQuantity())
+                        .responsible(transaction.getResponsible().getName())
+                        .movement(transaction.getMovement().name())
+                        .registeredAt(transaction.getRegisteredAt())
+                        .build())
+                .toList();
     }
 
-    public List<Transaction> filterTransactions(final String name) throws Exception {
+    public List<TransactionResponse> filterTransactions(final String name) throws Exception {
         if (name == null || (!name.equalsIgnoreCase("inflow") && !name.equalsIgnoreCase("outflow"))) {
             throw new Exception("Solo se permiten valores de tipo 'inflow' y 'outflow'.");
         }
         TransactionType transactionType = TransactionType.valueOf(name.toUpperCase().trim());
-        return transactionRepository.findByMovement(transactionType);
+        return transactionRepository.findByMovement(transactionType).stream()
+                .map(transaction -> TransactionResponse.builder()
+                        .id(transaction.getId())
+                        .product(transaction.getProduct().getName())
+                        .quantity(transaction.getQuantity())
+                        .responsible(transaction.getResponsible().getName())
+                        .movement(transaction.getMovement().name())
+                        .registeredAt(transaction.getRegisteredAt())
+                        .build())
+                .toList();
     }
 
 }

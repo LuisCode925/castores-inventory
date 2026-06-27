@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.code925.inventory.models.dto.input.RegisterUser;
 import dev.code925.inventory.models.dto.output.UserResponse;
 import dev.code925.inventory.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public ResponseEntity<UserResponse> register(@RequestBody RegisterUser request) {
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterUser request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.register(request));
     }
 
