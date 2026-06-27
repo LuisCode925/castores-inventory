@@ -24,8 +24,7 @@ public class RegisterUser {
     private String email;
 
     @NotBlank(message = "El campo password es obligatorio.")
-    @Length(min = 8, max = 25, message = "Su contraseña debe tener entre 8-25 caracteres.")
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$") // TODO: mensaje de error y modificar exp
-                                                                            // regex.
+    @Length(min = 8, max = 25, message = "Su contraseña debe tener entre 8-25 caracteres incluidos: numeros, minusculas, mayusculas y un caracter especial.")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,25}$")
     private String password;
 }

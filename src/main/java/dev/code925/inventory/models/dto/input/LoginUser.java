@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginUser {
 
-    @Email
-    @NotBlank
-    @Length(min = 10, max = 50)
+    @Email(message = "El formato no concuerda con un correo electronico valido.")
+    @NotBlank(message = "El campo email es obligatorio.")
+    @Length(min = 10, max = 50, message = "El correo electronico debe tener entre 10-50 caracteres.")
     private String email;
 
-    @NotBlank
-    @Length(min = 8, max = 25)
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,}$")
+    @NotBlank(message = "El campo password es obligatorio.")
+    @Length(min = 8, max = 25, message = "Su contraseña debe tener entre 8-25 caracteres incluidos: numeros, minusculas, mayusculas y un caracter especial.")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{8,25}$")
     private String password;
 
 }

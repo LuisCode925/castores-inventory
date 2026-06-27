@@ -28,8 +28,7 @@ public class UserServiceImpl implements UserService {
                 User user = User.builder()
                                 .name(request.getName())
                                 .email(request.getEmail())
-                                .password(passwordEncoder.encode(request.getPassword())) // Se hashea la constraseña
-                                                                                         // para almacenarla.
+                                .password(passwordEncoder.encode(request.getPassword()))
                                 .role(defaultRole)
                                 .status(true)
                                 .build();
